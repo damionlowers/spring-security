@@ -37,6 +37,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()//permit all whitelist urls above
                 .antMatchers("/api/**")
                 .hasAnyRole(STUDENT.name())
+                .antMatchers(HttpMethod.POST,"/admin/api/**").hasAnyRole(ADMIN.name(),ADMIN_TRAINEE.name())
                 .antMatchers(HttpMethod.DELETE,"/management/api/**").hasAuthority(COURSE_WRITE.getPermission())
                 .antMatchers(HttpMethod.POST,"/management/api/**").hasAuthority(COURSE_WRITE.getPermission())
                 .antMatchers(HttpMethod.PUT,"/management/api/**").hasAuthority(COURSE_WRITE.getPermission())

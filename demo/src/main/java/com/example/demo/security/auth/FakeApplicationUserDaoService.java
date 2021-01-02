@@ -14,14 +14,16 @@ import static com.example.demo.security.ApplicationUserRole.*;
 
 @Repository("Oracle-12g")
 public class FakeApplicationUserDaoService implements ApplicationUserDao {
-    @Autowired
-    @Qualifier("oracle19CTemplate")
     private JdbcTemplate jdbcTemplate;
+
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public FakeApplicationUserDaoService(PasswordEncoder passwordEncoder) {
+    public FakeApplicationUserDaoService(
+            PasswordEncoder passwordEncoder,
+            @Qualifier("oracle19CTemplate") JdbcTemplate jdbcTemplate) {
         this.passwordEncoder = passwordEncoder;
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
